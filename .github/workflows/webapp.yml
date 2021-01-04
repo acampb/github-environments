@@ -1,23 +1,15 @@
-name: Deploy ASP.NET Core app to Azure Web App
+name: 'Deploy ASP.NET Core app to Azure Web App'
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - '*'
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# 1. Set up the following secrets in your repository:
-#   AZURE_WEBAPP_PUBLISH_PROFILE
-#
-# 2. Change these variables for your configuration:
+      - "main"
+
 env:
   AZURE_WEBAPP_NAME: 'app-cloudlumberjack-eastus'    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '3.1.404'           # set this to the dot net version to use
+
 
 jobs:
   build-and-deploy:
@@ -49,5 +41,3 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app/myapp'
-
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
