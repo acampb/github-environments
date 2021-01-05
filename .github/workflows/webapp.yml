@@ -60,7 +60,7 @@ jobs:
   deploy-prod:
     runs-on: 'ubuntu-latest'
     environment: 'prod'
-    needs: build-and-publish
+    needs: [build-and-publish, deploy-dev]
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
