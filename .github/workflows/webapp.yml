@@ -7,7 +7,6 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: 'app-cloudlumberjack-eastus'    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '3.1.404'           # set this to the dot net version to use
 
 
@@ -32,14 +31,14 @@ jobs:
         run: |
           dotnet restore
           dotnet build --configuration Release
-          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/published-app'
+          dotnet publish -c Release -o '/published-app'
 
       # Publish artifact
       - name: Publish artifact
         uses: actions/upload-artifact@v2
         with:
           name: /published-app
-          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/published-app'
+          path: './app/published-app'
 
 #  deploy:
 #    runs-on: 'ubuntu-latest'
