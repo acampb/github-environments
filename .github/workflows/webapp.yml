@@ -43,6 +43,7 @@ jobs:
   deploy-dev:
     runs-on: 'ubuntu-latest'
     environment: 'dev'
+    needs: build-and-publish
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
@@ -60,6 +61,7 @@ jobs:
   deploy-prod:
     runs-on: 'ubuntu-latest'
     environment: 'prod'
+    needs: build-and-publish
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
