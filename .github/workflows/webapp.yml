@@ -31,7 +31,7 @@ jobs:
         run: |
           dotnet restore
           dotnet build --configuration Release
-          dotnet publish -c Release -o '/published-app'
+          dotnet publish -c Release -o './published-app'
 
       # Publish artifact
       - name: Publish artifact
