@@ -37,7 +37,7 @@ jobs:
       - name: Publish artifact
         uses: actions/upload-artifact@v2
         with:
-          name: /published-app
+          name: published-app
           path: './app/published-app'
 
 #  deploy:
