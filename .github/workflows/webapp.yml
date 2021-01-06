@@ -6,13 +6,12 @@ on:
       - "main"
 
 env:
-  DOTNET_VERSION: '3.1.404'           # set this to the dot net version to use
+  DOTNET_VERSION: '3.1.404'
 
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    #environment: 'prod'
     steps:
 
       # Checkout the repo
@@ -44,17 +43,20 @@ jobs:
     environment: 'dev'
     needs: build-and-publish
     steps:
+
+      # Download published artifact
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: published-app
           path: './published-app'
 
+      # Deploy to web app
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: app-cloudlumberjack-dev
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: './published-app'
 
   deploy-prod:
@@ -62,15 +64,18 @@ jobs:
     environment: 'prod'
     needs: [build-and-publish, deploy-dev]
     steps:
+
+      # Download published artifact
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: published-app
           path: './published-app'
 
+      # Deploy to web app
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: app-cloudlumberjack-prod
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: './published-app'
