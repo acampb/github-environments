@@ -52,7 +52,7 @@ jobs:
           path: './published-app'
 
       # Deploy to web app
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: app-cloudlumberjack-dev
@@ -73,7 +73,7 @@ jobs:
           path: './published-app'
 
       # Deploy to web app
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
           app-name: app-cloudlumberjack-prod
